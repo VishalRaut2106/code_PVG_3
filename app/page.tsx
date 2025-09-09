@@ -21,6 +21,10 @@ import {
   ChevronRight,
   Lightbulb,
   ArrowRight,
+  Activity,
+  Code2,
+  BarChart2,
+  Smartphone,
 } from "lucide-react"
 import Link from "next/link"
 import { useState, useRef, useEffect } from "react"
@@ -376,182 +380,117 @@ function WhyCodePVGSection() {
             </div>
           ))}
         </div>
-
-        <div className="bg-gradient-to-r from-accent/10 via-secondary/5 to-accent/10 rounded-2xl p-8 border border-border/30 backdrop-blur-sm">
-          <div className="text-center mb-6">
-            <h3 className="text-xl md:text-2xl font-heading font-bold text-foreground mb-2">
-              Trusted by Students Worldwide
-            </h3>
-            <p className="text-muted-foreground">
-              Join thousands of students who have transformed their coding journey with CodePVG
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {[
-              { number: "10K+", label: "Active Students", icon: <Users className="h-5 w-5" /> },
-              { number: "500+", label: "Practice Problems", icon: <BookOpen className="h-5 w-5" /> },
-              { number: "95%", label: "Success Rate", icon: <Trophy className="h-5 w-5" /> },
-              { number: "24/7", label: "Support Available", icon: <Zap className="h-5 w-5" /> },
-            ].map((stat, index) => (
-              <div key={index} className="text-center group">
-                <div className="bg-background/80 backdrop-blur-sm rounded-xl p-4 border border-border/50 shadow-md group-hover:shadow-lg transition-all duration-300">
-                  <div className="flex justify-center mb-2">
-                    <div className="bg-accent/10 p-2 rounded-lg text-accent">{stat.icon}</div>
-                  </div>
-                  <div className="text-2xl font-bold text-accent mb-1 group-hover:scale-105 transition-transform duration-300">
-                    {stat.number}
-                  </div>
-                  <div className="text-xs text-muted-foreground font-medium">{stat.label}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   )
 }
 
 function GallerySection() {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const carouselRef = useRef<HTMLDivElement>(null)
-
   const galleryItems = [
     {
       title: "Interactive Dashboard",
       description: "Track your progress with beautiful visualizations and detailed analytics",
       image: "/placeholder.svg?height=400&width=600",
       category: "Dashboard",
+      icon: <Activity className="h-6 w-6 text-accent" />
     },
     {
       title: "Problem Solving Interface",
       description: "Clean, distraction-free coding environment with syntax highlighting",
       image: "/placeholder.svg?height=400&width=600",
       category: "Editor",
+      icon: <Code2 className="h-6 w-6 text-blue-500" />
     },
     {
       title: "Learning Paths",
       description: "Structured roadmaps for different skill levels and career goals",
       image: "/placeholder.svg?height=400&width=600",
       category: "Learning",
+      icon: <BookOpen className="h-6 w-6 text-emerald-500" />
     },
     {
       title: "Community Features",
       description: "Connect and learn with fellow programmers in discussion forums",
       image: "/placeholder.svg?height=400&width=600",
       category: "Community",
+      icon: <Users className="h-6 w-6 text-purple-500" />
     },
     {
       title: "Performance Analytics",
       description: "Detailed insights into your coding journey and improvement areas",
       image: "/placeholder.svg?height=400&width=600",
       category: "Analytics",
+      icon: <BarChart2 className="h-6 w-6 text-amber-500" />
     },
     {
       title: "Mobile Experience",
       description: "Learn on the go with our fully responsive mobile design",
       image: "/placeholder.svg?height=400&width=600",
       category: "Mobile",
+      icon: <Smartphone className="h-6 w-6 text-rose-500" />
     },
   ]
 
-  const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % Math.max(1, galleryItems.length - 2))
-  }
-
-  const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + Math.max(1, galleryItems.length - 2)) % Math.max(1, galleryItems.length - 2))
-  }
-
-  useEffect(() => {
-    const interval = setInterval(nextSlide, 5000)
-    return () => clearInterval(interval)
-  }, [])
+  const filteredItems = galleryItems
 
   return (
-    <section className="py-20 bg-muted/30">
+    <section className="py-20 bg-gradient-to-b from-background to-muted/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <Badge variant="outline" className="mb-4">
-            Platform Gallery
+        <div className="text-center mb-12 px-4">
+          <Badge variant="outline" className="mb-4 bg-accent/10 text-accent border-accent/20 hover:bg-accent/20">
+            <Zap className="h-4 w-4 mr-2" />
+            Platform Showcase
           </Badge>
-          <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-4">
-            Explore Our <span className="text-accent">Features</span>
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-foreground mb-4 bg-clip-text text-transparent bg-gradient-to-r from-foreground to-muted-foreground">
+            Experience the Future of <span className="bg-clip-text text-transparent bg-gradient-to-r from-accent to-blue-500">Coding Education</span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Discover the interface and features that make CodePVG the perfect learning companion
+          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+            Discover how CodePVG revolutionizes learning with cutting-edge features designed for your success
           </p>
         </div>
 
-        <div className="relative">
-          <div className="overflow-hidden rounded-2xl">
-            <div
-              ref={carouselRef}
-              className="flex transition-transform duration-500 ease-in-out"
-              style={{ transform: `translateX(-${currentIndex * (100 / 3)}%)` }}
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-4">
+          {filteredItems.map((item, index) => (
+            <div 
+              key={index}
+              className="group relative bg-card/50 backdrop-blur-sm rounded-2xl border border-border/50 overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 hover:border-accent/30"
             >
-              {galleryItems.map((item, index) => (
-                <div key={index} className="w-1/3 flex-shrink-0 px-2">
-                  <Card className="overflow-hidden border-border hover:shadow-xl transition-all duration-300 group bg-card/80 backdrop-blur-sm">
-                    <div className="relative overflow-hidden">
-                      <img
-                        src={item.image || "/placeholder.svg"}
-                        alt={item.title}
-                        className="w-full h-64 object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className="absolute top-4 left-4">
-                        <Badge variant="secondary" className="bg-background/90 text-foreground">
-                          {item.category}
-                        </Badge>
-                      </div>
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    </div>
-                    <CardHeader>
-                      <CardTitle className="text-lg font-heading group-hover:text-accent transition-colors duration-300">
-                        {item.title}
-                      </CardTitle>
-                      <CardDescription className="text-muted-foreground leading-relaxed">
-                        {item.description}
-                      </CardDescription>
-                    </CardHeader>
-                  </Card>
+              <div className="relative h-48 bg-gradient-to-br from-accent/5 to-secondary/5 overflow-hidden">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-6">
+                  <p className="text-sm text-white/90 font-medium">{item.description}</p>
                 </div>
-              ))}
+              </div>
+              <div className="p-6">
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="p-2 rounded-lg bg-accent/10 text-accent">
+                    {item.icon}
+                  </div>
+                  <Badge variant="secondary" className="text-xs font-medium">
+                    {item.category}
+                  </Badge>
+                </div>
+                <h3 className="text-xl font-heading font-bold text-foreground mb-2 group-hover:text-accent transition-colors">
+                  {item.title}
+                </h3>
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="mt-2 px-0 text-muted-foreground hover:text-accent group-hover:pl-2 transition-all duration-300"
+                >
+                  Learn more
+                  <ArrowRight className="ml-1 h-4 w-4 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300" />
+                </Button>
+              </div>
             </div>
-          </div>
-
-          {/* Carousel Controls */}
-          <Button
-            variant="outline"
-            size="icon"
-            className="absolute left-4 top-1/2 -translate-y-1/2 bg-background/90 backdrop-blur-sm hover:bg-accent hover:text-accent-foreground transition-all duration-300"
-            onClick={prevSlide}
-          >
-            <ChevronLeft className="h-4 w-4" />
-          </Button>
-          <Button
-            variant="outline"
-            size="icon"
-            className="absolute right-4 top-1/2 -translate-y-1/2 bg-background/90 backdrop-blur-sm hover:bg-accent hover:text-accent-foreground transition-all duration-300"
-            onClick={nextSlide}
-          >
-            <ChevronRight className="h-4 w-4" />
-          </Button>
-
-          {/* Carousel Indicators */}
-          <div className="flex justify-center mt-6 space-x-2">
-            {Array.from({ length: Math.max(1, galleryItems.length - 2) }).map((_, index) => (
-              <button
-                key={index}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index === currentIndex ? "bg-accent scale-125" : "bg-muted-foreground/30 hover:bg-muted-foreground/50"
-                }`}
-                onClick={() => setCurrentIndex(index)}
-              />
-            ))}
-          </div>
+          ))}
         </div>
+
       </div>
     </section>
   )
@@ -605,7 +544,7 @@ function ContactSection() {
                   </div>
                   <div>
                     <p className="font-semibold text-foreground mb-1">Email Us</p>
-                    <p className="text-muted-foreground">contact@codepvg.edu</p>
+                    <p className="text-muted-foreground">tpo@pvgcoenashik.org</p>
                     <p className="text-sm text-muted-foreground mt-1">We'll respond within 24 hours</p>
                   </div>
                 </div>
@@ -616,7 +555,7 @@ function ContactSection() {
                   </div>
                   <div>
                     <p className="font-semibold text-foreground mb-1">Call Us</p>
-                    <p className="text-muted-foreground">+91 98765 43210</p>
+                    <p className="text-muted-foreground">+91 81498 12710</p>
                     <p className="text-sm text-muted-foreground mt-1">Mon-Fri, 9AM-6PM IST</p>
                   </div>
                 </div>
@@ -627,8 +566,8 @@ function ContactSection() {
                   </div>
                   <div>
                     <p className="font-semibold text-foreground mb-1">Visit Us</p>
-                    <p className="text-muted-foreground">Pune, Maharashtra</p>
-                    <p className="text-muted-foreground">India</p>
+                    <p className="text-muted-foreground">TPCell PVGCOE Nashik</p>
+                    <p className="text-muted-foreground">Nashik, Maharashtra, India</p>
                   </div>
                 </div>
               </div>
